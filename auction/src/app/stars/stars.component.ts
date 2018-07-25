@@ -1,5 +1,5 @@
 import { Component, OnInit,Input} from '@angular/core';
-import {start} from "repl";
+// import {start} from "repl";
 
 @Component({
   selector: 'app-stars',
