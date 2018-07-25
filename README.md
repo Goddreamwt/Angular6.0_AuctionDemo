@@ -154,9 +154,11 @@ product.component.html
 
 ```
 点击第一个商品跳转到商品详情页
-![这里写图片描述](https://img-blog.csdn.net/201807251434001?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d0ZGFzaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-![这里写图片描述](https://img-blog.csdn.net/20180725143436194?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d0ZGFzaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180725-144528.png)
+
+
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180725-144550.png)
 
 [gitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/77808533f15ba30367bb20f983d408ca1ed08576)
 
