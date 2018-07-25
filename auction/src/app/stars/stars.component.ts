@@ -21,5 +21,4 @@ export class StarsComponent implements OnInit {
       this.stars.push(i>this.rating);
     }
   }
-
 }
