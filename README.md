@@ -162,3 +162,282 @@ product.component.html
 
 [gitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/77808533f15ba30367bb20f983d408ca1ed08576)
 
+重构Auction依赖注入步骤
+-----------
+
+- 编写ProductService.包含3个方法：getProducts(),getProducts(id)以及getCommentsForProduct(id)
+
+>  ng g service shared/product
+
+
+product.service.ts
+
+```
+import {Injectable} from '@angular/core';
+
+@Injectable({
+providedIn: 'root'
+})
+export class ProductService {
+
+private products: Product[] = [
+new Product(1, '第一个商品', 1.99, 3.5, "这是第一商品，随便是到手京东卡是你的拉克丝等你拉屎的", ["电子产品", "硬件设备", "其他"]),
+new Product(2, '第二个商品', 2.99, 2.5, "这是第二商品，随便是到手京东卡是你的拉克丝等你拉屎的", ["硬件设备", "其他"]),
+new Product(3, '第三个商品', 3.99, 1.5, "这是第三商品，随便是到手京东卡是你的拉克丝等你拉屎的", ["电子产品", "硬件设备"]),
+new Product(4, '第四个商品', 4.99, 2.0, "这是第四商品，随便是到手京东卡是你的拉克丝等你拉屎的", ["电子产品", "其他"]),
+new Product(5, '第五个商品', 5.99, 3.5, "这是第五商品，随便是到手京东卡是你的拉克丝等你拉屎的", ["电子产品", "硬件设备", "其他"]),
+new Product(6, '第六个商品', 6.99, 4.5, "这是第六商品，随便是到手京东卡是你的拉克丝等你拉屎的", ["电子产品", "硬件设备", "其他"])
+];
+
+private comments:Comment[] = [
+new Comment(1,1,"2017-02-02 22:22:22","张三",3,"东西不错"),
+new Comment(2,1,"2017-03-02 23:22:22","李四",4,"东西挺不错"),
+new Comment(3,1,"2017-04-02 24:22:22","王五",2,"东西不错"),
+new Comment(4,1,"2017-05-02 25:22:22","赵六",1,"东西还不错"),
+new Comment(5,1,"2017-06-02 26:22:22","哈哈",3,"东西不错"),
+]
+constructor() {
+}
+
+getProducts():Product[] {
+return this.products;
+}
+
+getProduct(id:number):Product{
+return this.products.find((product) => product.id == id);
+}
+
+getCommentsForProductId(id:number):Comment[]{
+return this.comments.filter((comment:Comment) => comment.productId == id);
+}
+}
+
+
+export class Product {
+constructor(public id: number,
+public title: string,
+public price: number,
+public rating: number,
+public desc: string,
+public categories: Array<string>) {
+
+}
+}
+
+export class Comment{
+constructor(public  id:number,
+public productId:number,
+public timestamp:string,
+public user:string,
+public rating:number,
+public content:string
+){
+
+}
+}
+```
+
+- 修改路由配置。在从商品列表进入商品详情时，不再传递商品名称，改为传递商品ID。
+
+修改app.module.ts
+
+原来传的是productTitle，修改为productId
+```
+const routeConfig:Routes = [
+{path:'',component:HomeComponent},
+{path:'product/:productId',component:ProductDetailComponent}
+]
+```
+
+修改product.component.html，也改为id
+
+```
+<div *ngFor="let product of products" class="col-md-4 col-sm-4 col-lg-4">
+<div class="thumbnail">
+<!--//属性绑定-->
+<img [src]="imgUrl">
+<div class="caption">
+<h4 class="pull-right">{{product.price}}元</h4>
+<h4><a [routerLink]="['/product',product.id]">{{product.title}}</a></h4>
+<p>{{product.desc}}</p>
+</div>
+<div>
+<app-stars [rating]="product.rating"></app-stars>
+</div>
+</div>
+</div>
+
+```
+
+product-detail.component.ts
+
+```
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Product} from "../shared/product.service";
+
+@Component({
+selector: 'app-product-detail',
+templateUrl: './product-detail.component.html',
+styleUrls: ['./product-detail.component.css']
+})
+export class ProductDetailComponent implements OnInit {
+
+product:Product;
+
+constructor(private routeInfo:ActivatedRoute) { }
+
+ngOnInit() {
+let productId:number = this.routeInfo.snapshot.params["productId"];
+}
+
+}
+
+```
+
+- 注入ProductService并使用其服务。
+
+首先在app.module.ts中的`providers: [ProductService],`来声明这个服务。
+然后在product.component.ts中注入`ProductService`，并通过`ProductService`来获取`Products`
+
+```
+import { Component, OnInit } from '@angular/core';
+import {ProductService} from "../shared/product.service";
+
+@Component({
+selector: 'app-product',
+templateUrl: './product.component.html',
+styleUrls: ['./product.component.css']
+})
+export class ProductComponent implements OnInit {
+
+private products:Product[];
+
+private imgUrl = 'http://placehold.it/320x150';
+
+constructor(private productService:ProductService) { }
+
+ngOnInit() {
+
+this.products = this.productService.getProducts();
+}
+
+}
+
+```
+
+product-detail.component.ts
+
+```
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Product, ProductService} from "../shared/product.service";
+
+@Component({
+selector: 'app-product-detail',
+templateUrl: './product-detail.component.html',
+styleUrls: ['./product-detail.component.css']
+})
+export class ProductDetailComponent implements OnInit {
+
+product:Product;
+
+constructor(private routeInfo:ActivatedRoute,
+private productService:ProductService
+) { }
+
+ngOnInit() {
+let productId:number = this.routeInfo.snapshot.params["productId"];
+
+this.product = this.productService.getProduct(productId);
+}
+
+}
+```
+
+product-detail.component.html
+
+```
+<div class="thumbnail">
+<img src="http://placehold.it/820x230">
+<div>
+<h4 class="pull-right">{{product.price}}元</h4>
+<h4>{{product.title}}</h4>
+<p>{{product.desc}}</p>
+</div>
+
+</div>
+```
+完成了商品详情跳转及展示，接下来处理商品评论
+
+product-detail.component.ts
+
+```
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Product, ProductService, Comment} from "../shared/product.service";
+
+@Component({
+selector: 'app-product-detail',
+templateUrl: './product-detail.component.html',
+styleUrls: ['./product-detail.component.css']
+})
+export class ProductDetailComponent implements OnInit {
+
+product: Product;
+
+comments: Comment[];
+
+constructor(private routeInfo: ActivatedRoute,
+private productService: ProductService) {
+}
+
+ngOnInit() {
+let productId: number = this.routeInfo.snapshot.params["productId"];
+
+this.product = this.productService.getProduct(productId);
+this.comments = this.productService.getCommentsForProductId(productId);
+}
+
+}
+
+```
+product-detail.component.html
+
+```
+<div class="thumbnail">
+<img src="http://placehold.it/820x230">
+<div>
+<h4 class="pull-right">{{product.price}}元</h4>
+<h4>{{product.title}}</h4>
+<p>{{product.desc}}</p>
+</div>
+
+<div>
+<p class="pull-right">评论：{{comments.length}}</p>
+<p>
+<app-stars [rating]="product.rating"></app-stars>
+</p>
+</div>
+</div>
+
+<div class="well">
+<div class="row" *ngFor="let comment of comments">
+<hr>
+<div class="col-md-12">
+<app-stars [rating]="comment.rating"></app-stars>
+<span>{{comment.user}}</span>
+<span class="pull-right">{{comment.timestamp}}</span>
+<p></p>
+<p>{{comment.content}}</p>
+</div>
+</div>
+</div>
+```
+
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180726-110430.png)
+
+[gitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/230a263f3dc1e5a41dd0a77a2b61d17185902cd9)
+
+
+
