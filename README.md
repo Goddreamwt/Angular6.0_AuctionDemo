@@ -1,7 +1,85 @@
 # Angular4.0_AuctionDemo
 
-路由实战思路
+开发准备
+-
+1.百度Node.js下载并安装
 
+2.检查npm版本
+> npm -v
+
+3.安装angular/cli
+
+> sudo npm install -g @angular/cli
+
+4.检查版本
+
+> ng -v
+
+5.在当前目录下创建angular项目
+
+> ng new auction
+
+6.使用WebStrom打开项目
+
+
+组件
+--
+
+例如项目创建初始的app.component.ts文件
+
+```
+import { Component } from '@angular/core';
+
+// 装饰器
+@Component({
+// 源数据
+selector: 'app-root',
+templateUrl: './app.component.html',//模板
+styleUrls: ['./app.component.css']
+})
+
+// 控制器
+export class AppComponent {
+title = 'app';
+}
+
+```
+
+模块
+--
+例如项目创建初始的app.module.ts文件
+
+
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import {FormsModule} from "@angular/forms";
+import {HttpMethod} from "blocking-proxy/built/lib/webdriver_commands";
+
+//模块
+@NgModule({
+//模块中有的东西，只能声明组件，指令和管道
+declarations: [
+AppComponent
+],
+//要让应用正常运转依赖的其他模块
+imports: [
+BrowserModule, //浏览器模块
+FormsModule,   //表单模块
+HttpMethod,    //网络请求模块
+],
+//声明模块中提供了什么服务，只能声明服务
+providers: [],
+bootstrap: [AppComponent], //声明模块的主组件
+})
+export class AppModule { }
+
+```
+
+路由实战思路
+-
 一.创建商品详情组件，显示商品的图片和标题
 使用Angular命令行工具生成一个新的组件
 > ng g component productDetail
