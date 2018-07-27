@@ -518,4 +518,143 @@ product-detail.component.html
 [gitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/230a263f3dc1e5a41dd0a77a2b61d17185902cd9)
 
 
+商品搜索功能
+--
+1.首先在product中添加搜索栏
+
+product.component.html
+
+```
+<div class="row">
+<div class="col-sm-12">
+<div class="form-group">
+<input class="form-control" placeholder="请输入商品名称" [formControl] ="titleFilter">
+</div>
+</div>
+</div>
+<div *ngFor="let product of products" class="col-md-4 col-sm-4 col-lg-4">
+<div class="thumbnail">
+<!--//属性绑定-->
+<img [src]="imgUrl">
+<div class="caption">
+<h4 class="pull-right">{{product.price}}元</h4>
+<h4><a [routerLink]="['/product',product.id]">{{product.title}}</a></h4>
+<p>{{product.desc}}</p>
+</div>
+<div>
+<app-stars [rating]="product.rating"></app-stars>
+</div>
+</div>
+</div>
+
+```
+
+2.在app.module.ts的`imports`引入`ReactiveFormsModule`模块
+
+3.product.component.ts
+
+```
+import {Component, OnInit} from '@angular/core';
+import {ProductService, Product} from "../shared/product.service";
+import {FormControl} from "@angular/forms";
+import 'rxjs/Rx';
+
+@Component({
+selector: 'app-product',
+templateUrl: './product.component.html',
+styleUrls: ['./product.component.css']
+})
+export class ProductComponent implements OnInit {
+
+private products: Product[];
+private keyword: string;
+private titleFilter:FormControl = new FormControl();
+private imgUrl = 'http://placehold.it/320x150';
+
+constructor(private productService: ProductService) {
+this.titleFilter.valueChanges
+.debounceTime(500)
+.subscribe(
+value => this.keyword = value
+);
+}
+
+ngOnInit() {
+
+this.products = this.productService.getProducts();
+
+}
+
+}
+```
+
+`.debounceTime(500)` 的意思是当用户输入500毫秒以后才把用户的输入结果发送到`subscribe`观察者当中
+注意引入`import 'rxjs/Rx';`才能起作用
+升级到Angular6以后，需要
+
+> cd 项目根目录
+> npm install --save rxjs-compat
+
+否则报错。`debounceTime`是为了优化用户体验，防止页面抖动用的。属于rxjs响应式编程。
+
+4.创建管道
+
+> ng g pipe pipe/filter
+
+filter.pipe.ts
+
+```
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({
+name: 'filter'
+})
+export class FilterPipe implements PipeTransform {
+
+transform(list: any[], filterField: string, keyword: string): any {
+if (!filterField || !keyword) {
+return list;
+}
+return list.filter( item =>{
+let fiedlValue = item[filterField];
+return  fiedlValue.indexOf(keyword) >= 0;
+});
+}
+}
+
+```
+
+5.product.component.html
+
+```
+<div class="row">
+<div class="col-sm-12">
+<div class="form-group">
+<input class="form-control" placeholder="请输入商品名称"
+[formControl] ="titleFilter"
+>
+</div>
+</div>
+</div>
+<div *ngFor="let product of products | filter:'title':keyword "  class="col-md-4 col-sm-4 col-lg-4">
+<div class="thumbnail">
+<!--//属性绑定-->
+<img [src]="imgUrl">
+<div class="caption">
+<h4 class="pull-right">{{product.price}}元</h4>
+<h4><a [routerLink]="['/product',product.id]">{{product.title}}</a></h4>
+<p>{{product.desc}}</p>
+</div>
+<div>
+<app-stars [rating]="product.rating"></app-stars>
+</div>
+</div>
+</div>
+
+```
+
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/1.png)
+
+[gitHub参考代码链接](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/547ff358379a1d86fdd2068ac45fb9ca37a032e1)
+
 
