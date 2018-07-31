@@ -23,6 +23,10 @@ export class ProductService {
     constructor() {
     }
 
+    getAllCategories():string[]{
+        return ["电子产品", "硬件设备", "其他"];
+    }
+
     getProducts(): Product[] {
         return this.products;
     }
