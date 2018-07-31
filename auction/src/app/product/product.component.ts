@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService, Product} from "../shared/product.service";
 import {FormControl} from "@angular/forms";
-// import {debounceTime} from "rxjs/add/operator/";
 import 'rxjs/Rx'
 
 @Component({
