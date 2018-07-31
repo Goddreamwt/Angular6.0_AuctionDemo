@@ -1,4 +1,8 @@
 # Angular4.0_AuctionDemo
+[目录](#1)  
+&nbsp; &nbsp; [ 开发准备](#1.1)  
+&nbsp; &nbsp;  [ 组件](#1.2)  
+&nbsp; &nbsp; [ 模块](#1.3)  
 
 开发准备
 -
@@ -1070,3 +1074,113 @@ stars.component.html
 ![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180731-153843.png)
 
 [GitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/908edaf9674b889a9785f8015a9b26e5ce543a9d)
+
+完善搜索功能(表单处理)
+------
+在商品名称和商品价格以及商品类别都输入或者选择合法的情况下才能进行搜索。
+
+一.product.service.ts添加一个新的方法，获取所有商品类别
+
+```
+getAllCategories():string[]{
+return ["电子产品", "硬件设备", "其他"];
+}
+```
+
+二.使用响应式表单实现效果，所以建一个表单的数据模型
+search.component.ts
+
+```
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
+import {ProductService} from "../shared/product.service";
+
+@Component({
+selector: 'app-search',
+templateUrl: './search.component.html',
+styleUrls: ['./search.component.css']
+})
+export class SearchComponent implements OnInit {
+
+formModel: FormGroup;
+
+categories:string[];
+
+constructor(private productService:ProductService) {
+let fb = new FormBuilder();
+this.formModel = fb.group({
+title: ['', Validators.minLength(3)],
+price: [null,this.positiveNumberValidator],
+category: ['-1']
+});
+}
+
+ngOnInit() {
+this.categories =this.productService.getAllCategories();
+}
+
+positiveNumberValidator(control: FormControl): any {
+if (!control.value) {
+return null;
+}
+let price = parseInt(control.value);
+
+if (price > 0) {
+return null;
+}else {
+return {positiveNumber:true};
+}
+}
+
+onSearch(){
+if (this.formModel.valid){
+console.log(this.formModel.value);
+}
+}
+}
+
+```
+
+三.把数据模型与HTML元素链接
+search.component.html
+
+```
+<form [formGroup]="formModel" (ngSubmit)="onSearch()" novalidate>
+<!--novalidate:禁用浏览器验证的默认行为-->
+<div class="form-group" [class.has-error]="formModel.hasError('minlength','title')">
+<label for="productTitle">商品名称</label>
+<input formControlName="title" type="text" id="productTitle" placeholder="商品名称" class="form-control">
+<span class="help-block" [class.hidden]="!formModel.hasError('minlength','title')">
+请至少输入3个字
+</span>
+</div>
+
+<div class="form-group" [class.has-error]="formModel.hasError('positiveNumber','price')">
+<label for="productPrice">商品价格</label>
+<input formControlName="price" type="number" id="productPrice" placeholder="商品价格" class="form-control">
+<span class="help-block" [class.hidden]="!formModel.hasError('positiveNumber','price')">
+请输入正数
+</span>
+</div>
+
+<div class="form-group">
+<label for="productCategory">商品类别</label>
+<select formControlName="category" id="productCategory" class="form-control">
+<option value="-1">全部分类</option>
+<option *ngFor="let category of categories" [value]="category">{{category}}</option>
+</select>
+</div>
+
+<div class="form-group">
+<button type="submit" class="btn btn-primary btn-block">搜索</button>
+</div>
+</form>
+
+```
+
+最终效果：
+
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180731-180939.png)
+
+[gitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/b1297fc715999155cb8acb489e391493e8576de6?diff=unified)
+
