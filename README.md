@@ -1,11 +1,21 @@
-# Angular4.0_AuctionDemo
-[目录](#1)  
-&nbsp; &nbsp; [ 开发准备](#1.1)  
-&nbsp; &nbsp;  [ 组件](#1.2)  
-&nbsp; &nbsp; [ 模块](#1.3)  
 
-开发准备
--
+# Angular4.0_AuctionDemo
+<!-- TOC -->
+
+- [Angular4.0_AuctionDemo](#angular40_auctiondemo)
+    - [开发准备](#开发准备)
+    - [组件](#组件)
+    - [模块](#模块)
+    - [路由实战思路](#路由实战思路)
+    - [重构Auction依赖注入步骤](#重构auction依赖注入步骤)
+    - [商品搜索功能](#商品搜索功能)
+    - [添加评论功能(组件间通讯)](#添加评论功能组件间通讯)
+    - [完善搜索功能(表单处理)](#完善搜索功能表单处理)
+
+<!-- /TOC -->
+
+## 开发准备
+
 1.百度Node.js下载并安装
 
 2.检查npm版本
@@ -26,8 +36,8 @@
 6.使用WebStrom打开项目
 
 
-组件
---
+## 组件
+
 
 例如项目创建初始的app.component.ts文件
 
@@ -49,8 +59,8 @@ title = 'app';
 
 ```
 
-模块
---
+##  模块
+
 例如项目创建初始的app.module.ts文件
 
 
@@ -82,8 +92,8 @@ export class AppModule { }
 
 ```
 
-路由实战思路
--
+## 路由实战思路
+
 一.创建商品详情组件，显示商品的图片和标题
 使用Angular命令行工具生成一个新的组件
 > ng g component productDetail
@@ -244,8 +254,8 @@ product.component.html
 
 [gitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/77808533f15ba30367bb20f983d408ca1ed08576)
 
-重构Auction依赖注入步骤
------------
+## 重构Auction依赖注入步骤
+
 
 - 编写ProductService.包含3个方法：getProducts(),getProducts(id)以及getCommentsForProduct(id)
 
@@ -522,8 +532,8 @@ product-detail.component.html
 [gitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/230a263f3dc1e5a41dd0a77a2b61d17185902cd9)
 
 
-商品搜索功能
---
+## 商品搜索功能
+
 1.首先在product中添加搜索栏
 
 product.component.html
@@ -662,8 +672,8 @@ return  fiedlValue.indexOf(keyword) >= 0;
 [gitHub参考代码链接](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/547ff358379a1d86fdd2068ac45fb9ca37a032e1)
 
 
-添加评论功能(组件间通讯)
----
+## 添加评论功能(组件间通讯)
+
 实现点击星级评价组件,首先先给星级评价组件添加点击状态。
 
 stars.component.html
@@ -1075,8 +1085,8 @@ stars.component.html
 
 [GitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/908edaf9674b889a9785f8015a9b26e5ce543a9d)
 
-完善搜索功能(表单处理)
-------
+## 完善搜索功能(表单处理)
+
 在商品名称和商品价格以及商品类别都输入或者选择合法的情况下才能进行搜索。
 
 一.product.service.ts添加一个新的方法，获取所有商品类别
