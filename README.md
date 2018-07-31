@@ -658,3 +658,415 @@ return  fiedlValue.indexOf(keyword) >= 0;
 [gitHub参考代码链接](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/547ff358379a1d86fdd2068ac45fb9ca37a032e1)
 
 
+添加评论功能(组件间通讯)
+---
+实现点击星级评价组件,首先先给星级评价组件添加点击状态。
+
+stars.component.html
+
+```
+<p>
+<span  *ngFor="let star of stars; let i=index;" class="glyphicon glyphicon-star"
+[class.glyphicon-star-empty]="star" (click)="clickStar(i)" ></span>
+<span>{{rating}}星</span>
+</p>
+
+```
+
+点击星级评价组件，修改星星值的状态
+stars.component.ts
+
+```
+import {Component, OnInit, Input} from '@angular/core';
+// import {start} from "repl";
+
+@Component({
+selector: 'app-stars',
+templateUrl: './stars.component.html',
+styleUrls: ['./stars.component.css']
+})
+export class StarsComponent implements OnInit {
+
+@Input()
+private rating: number = 0;
+
+private stars: boolean[];
+
+@Input()
+private readonly:boolean = true;
+
+constructor() {
+}
+
+ngOnInit() {
+this.stars = [];
+for (let i = 1; i <= 5; i++) {
+this.stars.push(i > this.rating);
+}
+}
+
+clickStar(index: number) {
+if (!this.readonly){
+this.rating = index + 1;
+this.ngOnInit();
+}
+}
+
+}
+
+```
+新建两个属性用来保存新的评价状态newRating，newComment
+product-detail.component.ts
+
+```
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Product, ProductService, Comment} from "../shared/product.service";
+
+@Component({
+selector: 'app-product-detail',
+templateUrl: './product-detail.component.html',
+styleUrls: ['./product-detail.component.css']
+})
+export class ProductDetailComponent implements OnInit {
+
+product: Product;
+
+comments: Comment[];
+
+newRating:number =5;
+newComment:string = "";
+
+constructor(private routeInfo: ActivatedRoute,
+private productService: ProductService) {
+}
+
+ngOnInit() {
+let productId: number = this.routeInfo.snapshot.params["productId"];
+
+this.product = this.productService.getProduct(productId);
+this.comments = this.productService.getCommentsForProductId(productId);
+}
+}
+
+```
+
+product-detail.component.html
+
+```
+<div class="thumbnail">
+<img src="http://placehold.it/820x230">
+<div>
+<h4 class="pull-right">{{product.price}}元</h4>
+<h4>{{product.title}}</h4>
+<p>{{product.desc}}</p>
+</div>
+
+<div>
+<p class="pull-right">评论：{{comments.length}}</p>
+<p>
+<app-stars [rating]="product.rating"></app-stars>
+</p>
+</div>
+</div>
+
+<div class="well">
+<div>
+<div><app-stars [rating]="newRating" [readonly]="false"></app-stars></div>
+<div>
+<textarea [(ngModel)]="newComment"></textarea>
+</div>
+<div>
+<button class="btn" (click)="addComment()">提交</button>
+</div>
+</div>
+
+<div class="row" *ngFor="let comment of comments">
+<hr>
+<div class="col-md-12">
+<app-stars [rating]="comment.rating"></app-stars>
+<span>{{comment.user}}</span>
+<span class="pull-right">{{comment.timestamp}}</span>
+<p></p>
+<p>{{comment.content}}</p>
+</div>
+</div>
+</div>
+```
+
+product-detail.component.ts
+
+```
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Product, ProductService, Comment} from "../shared/product.service";
+
+@Component({
+selector: 'app-product-detail',
+templateUrl: './product-detail.component.html',
+styleUrls: ['./product-detail.component.css']
+})
+export class ProductDetailComponent implements OnInit {
+
+product: Product;
+
+comments: Comment[];
+
+newRating:number =5;
+newComment:string = "";
+
+constructor(private routeInfo: ActivatedRoute,
+private productService: ProductService) {
+}
+
+ngOnInit() {
+let productId: number = this.routeInfo.snapshot.params["productId"];
+
+this.product = this.productService.getProduct(productId);
+this.comments = this.productService.getCommentsForProductId(productId);
+}
+
+addComment(){
+let comment = new Comment(0,this.product.id,new Date().toISOString(),"someone",this.newRating,this.newComment);
+this.comments.unshift(comment);
+}
+}
+
+```
+
+发现问题：选择的是2星，但是出现的确是5星，是因为星星组件没有进行双向绑定设置。
+
+stars.component.ts 添加输出属性
+
+```
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+// import {start} from "repl";
+
+@Component({
+selector: 'app-stars',
+templateUrl: './stars.component.html',
+styleUrls: ['./stars.component.css']
+})
+export class StarsComponent implements OnInit {
+
+@Input()
+private rating: number = 0;
+
+@Output()
+private ratingChange:EventEmitter<number> = new EventEmitter();
+
+private stars: boolean[];
+
+@Input()
+private readonly:boolean = true;
+
+constructor() {
+}
+
+ngOnInit() {
+this.stars = [];
+for (let i = 1; i <= 5; i++) {
+this.stars.push(i > this.rating);
+}
+}
+
+clickStar(index: number) {
+if (!this.readonly){
+this.rating = index + 1;
+this.ngOnInit();
+this.ratingChange.emit(this.rating);
+}
+}
+
+}
+
+```
+product-detail.component.html 修改为双向绑定
+
+```
+<div class="thumbnail">
+<img src="http://placehold.it/820x230">
+<div>
+<h4 class="pull-right">{{product.price}}元</h4>
+<h4>{{product.title}}</h4>
+<p>{{product.desc}}</p>
+</div>
+
+<div>
+<p class="pull-right">评论：{{comments.length}}</p>
+<p>
+<app-stars [rating]="product.rating"></app-stars>
+</p>
+</div>
+</div>
+
+<div class="well">
+<div>
+<div><app-stars [(rating)]="newRating" [readonly]="false"></app-stars></div>
+<div>
+<textarea [(ngModel)]="newComment"></textarea>
+</div>
+<div>
+<button class="btn" (click)="addComment()">提交</button>
+</div>
+</div>
+
+<div class="row" *ngFor="let comment of comments">
+<hr>
+<div class="col-md-12">
+<app-stars [rating]="comment.rating"></app-stars>
+<span>{{comment.user}}</span>
+<span class="pull-right">{{comment.timestamp}}</span>
+<p></p>
+<p>{{comment.content}}</p>
+</div>
+</div>
+</div>
+```
+
+注意：只有当输入属性`@Input()  private rating: number = 0;` 和输出属性`@Output() private ratingChange:EventEmitter<number> = new EventEmitter();` 符合`rating` + `Change` = `ratingChange` 时，才可以使用`[(rating)]="newRating"`这种方式来写，不然就需要写一个`ratingChange`的输出事件。
+
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/12.png)
+
+
+接下来，我们设置是否显示评价功能区域
+
+product-detail.component.ts
+
+```
+isCommentHidden = true;
+
+```
+
+product-detail.component.html
+```
+<div class="well">
+<div>
+<button class="btn btn-success" (click)="isCommentHidden = !isCommentHidden">发表评论</button>
+</div>
+<div [hidden] = "isCommentHidden">
+<div><app-stars [(rating)]="newRating" [readonly]="false"></app-stars></div>
+<div>
+<textarea [(ngModel)]="newComment"></textarea>
+</div>
+<div>
+<button class="btn" (click)="addComment()">提交</button>
+</div>
+</div>
+
+<div class="row" *ngFor="let comment of comments">
+<hr>
+<div class="col-md-12">
+<app-stars [rating]="comment.rating"></app-stars>
+<span>{{comment.user}}</span>
+<span class="pull-right">{{comment.timestamp}}</span>
+<p></p>
+<p>{{comment.content}}</p>
+</div>
+</div>
+</div>
+```
+
+完成。
+
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180731-150737.png)
+
+product-detail.component.ts
+
+```
+addComment(){
+let comment = new Comment(0,this.product.id,new Date().toISOString(),"someone",this.newRating,this.newComment);
+this.comments.unshift(comment);
+
+this.newComment =null;
+this.newRating = 5;
+this.isCommentHidden = true;
+}
+```
+
+stars.component.ts 使用`ngOnChanges`改变星级初始状态
+
+```
+import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+// import {start} from "repl";
+
+@Component({
+selector: 'app-stars',
+templateUrl: './stars.component.html',
+styleUrls: ['./stars.component.css']
+})
+export class StarsComponent implements OnInit,OnChanges {
+
+@Input()
+private rating: number = 0;
+
+@Output()
+private ratingChange: EventEmitter<number> = new EventEmitter();
+
+private stars: boolean[];
+
+@Input()
+private readonly: boolean = true;
+
+constructor() {
+}
+
+ngOnInit() {
+
+}
+
+ngOnChanges(changes: SimpleChanges): void {
+this.stars = [];
+for (let i = 1; i <= 5; i++) {
+this.stars.push(i > this.rating);
+}
+}
+
+clickStar(index: number) {
+if (!this.readonly) {
+this.rating = index + 1;
+this.ratingChange.emit(this.rating);
+}
+}
+
+}
+
+```
+
+让商品详情根据我们新的评星，计算整个的星级平均值
+
+product-detail.component.ts
+
+- reduce方法需要两个参数(sum,comment) => sum + comment.rating 匿名回调，0 代表初始值
+- 循环comments数组中的所有元素，当第一次循环的时候sum=0，comment是数组中的第一个元素。sum
++comment.rating作为返回值，作为下一次循环时的sum
+
+```
+addComment(){
+let comment = new Comment(0,this.product.id,new Date().toISOString(),"someone",this.newRating,this.newComment);
+this.comments.unshift(comment);
+
+let sum = this.comments.reduce((sum,comment) => sum + comment.rating,0);
+this.product.rating =sum / this.comments.length;
+
+this.newComment =null;
+this.newRating = 5;
+this.isCommentHidden = true;
+}
+```
+
+使用管道进行星级数值规则初始化
+stars.component.html
+
+```
+<p>
+<span  *ngFor="let star of stars; let i=index;" class="glyphicon glyphicon-star"
+[class.glyphicon-star-empty]="star" (click)="clickStar(i)" ></span>
+<span>{{rating | number:'1.0-2'}}星</span>
+</p>
+
+```
+
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180731-153843.png)
+
+[GitHub参考代码](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/commit/908edaf9674b889a9785f8015a9b26e5ce543a9d)
