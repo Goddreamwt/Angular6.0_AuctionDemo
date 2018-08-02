@@ -1574,7 +1574,7 @@ new Comment(5, 1, "2017-06-02 26:22:22", "哈哈", 3, "东西不错"),
 </div>
 
 ```
-![这里写图片描述](https://img-blog.csdn.net/20180802112936639?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d0ZGFzaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180802-112927.png)
 商品列表组件改造完毕了，我们继续改造商品详情组件
 
 product-detail.component.ts
@@ -1681,7 +1681,7 @@ product-detail.component.html
 </div>
 ```
 
-![这里写图片描述](https://img-blog.csdn.net/20180802143844886?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d0ZGFzaw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180802-143832.png)
 
 [参考地址](https://segmentfault.com/a/1190000010259536)
 
