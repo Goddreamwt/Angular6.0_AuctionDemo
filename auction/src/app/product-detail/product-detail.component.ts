@@ -23,10 +23,14 @@ export class ProductDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        let productId: number = this.routeInfo.snapshot.params["productId"];
-
-        this.product = this.productService.getProduct(productId);
-        this.comments = this.productService.getCommentsForProductId(productId);
+        let productId: string = this.routeInfo.snapshot.params["productId"];
+        //使用手工订阅的方式
+        this.productService.getProduct(productId).subscribe(
+            product => this.product = product
+        );
+        this.productService.getCommentsForProductId(productId).subscribe(
+            coments => this.comments = coments
+        );
     }
 
     addComment(){
