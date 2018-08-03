@@ -1,8 +1,8 @@
 
-# Angular4.0_AuctionDemo
+# Angular6.0_AuctionDemo
 <!-- TOC -->
 
-- [Angular4.0_AuctionDemo](#angular40_auctiondemo)
+- [Angular6.0_AuctionDemo](#angular40_auctiondemo)
     - [开发准备](#开发准备)
     - [组件](#组件)
     - [模块](#模块)
