@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Angular4.0_AuctionDemo.iml" filepath="$PROJECT_DIR$/.idea/Angular4.0_AuctionDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Angular6.0_AuctionDemo/.idea/Angular4.0_AuctionDemo.iml" filepath="$PROJECT_DIR$/../Angular6.0_AuctionDemo/.idea/Angular4.0_AuctionDemo.iml" />
     </modules>
   </component>
 </project>
