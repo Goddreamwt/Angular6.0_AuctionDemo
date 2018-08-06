@@ -14,6 +14,15 @@
     </div>
 </div>
 
+<div class="thumbnail">
+    <button class="btn btn-default btn-lg"
+            [class.active] = "isWatched"
+            (click)="watchProduct()" >
+            {{isWatched?'取消关注':'关注'}}
+    </button>
+    <label>最新出价：{{currentBid | number:'.2-2'}}元</label>
+</div>
+
 <div class="well">
     <div>
         <button class="btn btn-success" (click)="isCommentHidden = !isCommentHidden">发表评论</button>

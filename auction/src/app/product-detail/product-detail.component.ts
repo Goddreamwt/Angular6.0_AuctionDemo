@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Product, ProductService, Comment} from "../shared/product.service";
+import {WebSocketService} from "../shared/web-socket.service";
+import {any} from "codelyzer/util/function";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-product-detail',
@@ -13,37 +16,64 @@ export class ProductDetailComponent implements OnInit {
 
     comments: Comment[];
 
-    newRating:number =5;
-    newComment:string = "";
+    newRating: number = 5;
+    newComment: string = "";
 
     isCommentHidden = true;
 
+    isWatched: boolean = false;
+    currentBid: number;
+
+    subscription: Subscription;
+
     constructor(private routeInfo: ActivatedRoute,
-                private productService: ProductService) {
+                private productService: ProductService,
+                private wsService: WebSocketService) {
     }
 
     ngOnInit() {
         let productId: string = this.routeInfo.snapshot.params["productId"];
-        //使用手工订阅的方式
+
         this.productService.getProduct(productId).subscribe(
-            product => this.product = product
+            product => {
+                this.product = product;
+                this.currentBid = product.price;
+            }
         );
         this.productService.getCommentsForProductId(productId).subscribe(
             coments => this.comments = coments
         );
     }
 
-    addComment(){
-        let comment = new Comment(0,this.product.id,new Date().toISOString(),"someone",this.newRating,this.newComment);
+    addComment() {
+        let comment = new Comment(0, this.product.id, new Date().toISOString(), "someone", this.newRating, this.newComment);
         this.comments.unshift(comment);
 
-        //reduce方法需要两个参数(sum,comment) => sum + comment.rating 匿名回调，0 代表初始值
-        //循环comments数组中的所有元素，当第一次循环的时候sum=0，comment是数组中的第一个元素。sum + comment.rating作为返回值，作为下一次循环时的sum
-        let sum = this.comments.reduce((sum,comment) => sum + comment.rating,0);
-        this.product.rating =sum / this.comments.length;
+        let sum = this.comments.reduce((sum, comment) => sum + comment.rating, 0);
+        this.product.rating = sum / this.comments.length;
 
-        this.newComment =null;
+        this.newComment = null;
         this.newRating = 5;
         this.isCommentHidden = true;
+    }
+
+    watchProduct() {
+        var _this = this;
+        if (_this.subscription) {
+            _this.subscription.unsubscribe();
+            _this.isWatched = false;
+            _this.subscription = null;
+        } else {
+            _this.isWatched = true;
+            let products: any[];
+            _this.subscription = this.wsService.createObservableSocket("ws://localhost:8085", this.product.id)
+                .subscribe(
+                    function (products1) {
+                        console.log(JSON.parse(products1));
+                        products = JSON.parse(products1);
+                        _this.currentBid = products[0].bid
+                    }
+                );
+        }
     }
 }
