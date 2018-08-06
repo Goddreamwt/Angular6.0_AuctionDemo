@@ -2,7 +2,7 @@
 # Angular6.0_AuctionDemo
 <!-- TOC -->
 
-- [Angular6.0_AuctionDemo](#angular40_auctiondemo)
+- [Angular6.0_AuctionDemo](#angular60_auctiondemo)
     - [开发准备](#开发准备)
     - [组件](#组件)
     - [模块](#模块)
@@ -11,6 +11,13 @@
     - [商品搜索功能](#商品搜索功能)
     - [添加评论功能(组件间通讯)](#添加评论功能组件间通讯)
     - [完善搜索功能(表单处理)](#完善搜索功能表单处理)
+    - [创建Web服务器](#创建web服务器)
+    - [网络请求数据的方式改造项目](#网络请求数据的方式改造项目)
+    - [与服务器通讯(项目完善商品搜索功能)](#与服务器通讯项目完善商品搜索功能)
+    - [添加商品关注功能](#添加商品关注功能)
+    - [构建](#构建)
+    - [部署](#部署)
+    - [多环境](#多环境)
 
 <!-- /TOC -->
 
@@ -2348,17 +2355,17 @@ _this.currentBid = products[0].bid
 
 使用命令`ng build`进行构建
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-100450.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103357.png)
 
 构建完成以后，会在项目中多出一个dist文件夹
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103357.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103413.png)
 
 ## 部署
 
 在服务器端新建一个文件夹`client`，将`dist`文件夹中的文件复制粘贴到`cleint`文件夹当中
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103413.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103843.png)
 
 这个过程就叫部署
 
@@ -2380,7 +2387,7 @@ res.send("Hello Express");
 
 但是当点击进详情页的时候，再刷新浏览器，就会报错
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-100308.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-110308.png)
 
 修改客户端`app.module.ts`文件
 
@@ -2398,7 +2405,7 @@ providers: [ProductService,WebSocketService,
 再刷新`http://localhost:8000`我们发现会变成这样`http://localhost:8000/#/`
 此时就可以解决上面的问题。
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-100406.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-110406.png)
 
 这样，部署就完毕了。
 
@@ -2406,15 +2413,15 @@ providers: [ProductService,WebSocketService,
 
 Angular会有环境配置文件，开发环境，生产环境，线上环境，测试环境等等
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-101310.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-111310.png)
 
 我们在main.ts文件中，已经在使用了
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-101541.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-111541.png)
 
 默认是在开发者模式中
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-101906.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-111906.png)
 
 我们修改到生产环境中，修改`package.json`
 
@@ -2422,11 +2429,11 @@ Angular会有环境配置文件，开发环境，生产环境，线上环境，�
 "start": "ng serve --prod --proxy-config proxy.conf.json",
 ```
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-101912.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-113812.png)
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103825.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-113825.png)
 
-![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103837.png)
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-113837.png)
 
 同样bulid也可使用
 
