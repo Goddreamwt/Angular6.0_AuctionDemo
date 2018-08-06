@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {environment} from "../environments/environment";
 
 // 装饰器
 @Component({
@@ -11,4 +12,8 @@ import { Component } from '@angular/core';
 // 控制器
 export class AppComponent {
   title = 'angular学习，哈哈哈哈';
+
+    constructor(){
+        console.log("微信号是"+environment.weixinNumber);
+    }
 }

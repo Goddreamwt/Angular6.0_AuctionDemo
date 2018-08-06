@@ -1,4 +1,4 @@
-//核心模块提供的enableProdMode用来，用来关闭angular的开发者模式
+ //核心模块提供的enableProdMode用来，用来关闭angular的开发者模式
 import { enableProdMode } from '@angular/core';
 //使用哪个模块来启动应用
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
