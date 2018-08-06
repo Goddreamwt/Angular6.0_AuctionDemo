@@ -2339,3 +2339,100 @@ _this.currentBid = products[0].bid
 
 ![image](https://github.com/Goddreamwt/Angular4.0_AuctionDemo/blob/master/image/QQ20180806-100450.png)
 
+
+## 构建
+构建：编译和合并
+部署：与服务器整合
+
+> ng build
+
+使用命令`ng build`进行构建
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-100450.png)
+
+构建完成以后，会在项目中多出一个dist文件夹
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103357.png)
+
+## 部署
+
+在服务器端新建一个文件夹`client`，将`dist`文件夹中的文件复制粘贴到`cleint`文件夹当中
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103413.png)
+
+这个过程就叫部署
+
+
+修改`auction_server.js`
+
+新增代码`var path = require("path");`将`app.get('/', function (req, res) {
+res.send("Hello Express");
+});` 替换成`app.use('/',express.static(path.join(__dirname,'..','client')));`
+
+
+然后
+
+> nodemon build/auction_server.js
+
+再访问`http://localhost:8000/` 就会自动跳转`client`的`index`页面
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-105342.png)
+
+但是当点击进详情页的时候，再刷新浏览器，就会报错
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-100308.png)
+
+修改客户端`app.module.ts`文件
+
+```
+providers: [ProductService,WebSocketService,
+{provide:LocationStrategy,useClass:HashLocationStrategy}],
+```
+
+再执行
+
+> ng build
+
+再将新生成的`dist`文件复制到服务器端，将原有的文件全部覆盖
+
+再刷新`http://localhost:8000`我们发现会变成这样`http://localhost:8000/#/`
+此时就可以解决上面的问题。
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-100406.png)
+
+这样，部署就完毕了。
+
+## 多环境
+
+Angular会有环境配置文件，开发环境，生产环境，线上环境，测试环境等等
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-101310.png)
+
+我们在main.ts文件中，已经在使用了
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-101541.png)
+
+默认是在开发者模式中
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-101906.png)
+
+我们修改到生产环境中，修改`package.json`
+
+```
+"start": "ng serve --prod --proxy-config proxy.conf.json",
+```
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-101912.png)
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103825.png)
+
+![image](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/blob/master/image/QQ20180806-103837.png)
+
+同样bulid也可使用
+
+> ng build --prod
+
+[客户端代码参考](https://github.com/Goddreamwt/Angular6.0_AuctionDemo/commit/f5535f827aa4c69f8cd001a61cef427e73a1fc53)
+
+[服务端代码参考](https://github.com/Goddreamwt/Angular_Auction_Server/commit/99ff7be1a0717a1266d42bac8ce90580b1731cd9)
+
