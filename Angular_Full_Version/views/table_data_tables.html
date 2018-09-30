@@ -1,0 +1,501 @@
+<!--<div class="row wrapper border-bottom white-bg page-heading">-->
+    <!--<div class="col-lg-10">-->
+        <!--<h2>Data Tables</h2>-->
+        <!--<ol class="breadcrumb">-->
+            <!--<li>-->
+                <!--<a href="index.html">Home</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a>Tables</a>-->
+            <!--</li>-->
+            <!--<li class="active">-->
+                <!--<strong>Data Tables</strong>-->
+            <!--</li>-->
+        <!--</ol>-->
+    <!--</div>-->
+    <!--<div class="col-lg-2">-->
+
+    <!--</div>-->
+<!--</div>-->
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="datatablesCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <!--<div class="ibox-title">-->
+                    <!--<h5>Basic Data Tables Example-->
+                        <!--<small>Sort, search</small>-->
+                    <!--</h5>-->
+                    <!--<div ibox-tools></div>-->
+                <!--</div>-->
+                <div class="ibox-content">
+
+                    <!--<table datatable="" dt-options="dtOptions" class="table table-striped table-bordered table-hover dataTables-example">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th>Rendering engine</th>-->
+                            <!--<th>Browser</th>-->
+                            <!--<th>Platform(s)</th>-->
+                            <!--<th>Engine version</th>-->
+                            <!--<th>CSS grade</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                         <!--<tr >-->
+                            <!--<td>Trident</td>-->
+                            <!--<td>Internet-->
+                                <!--Explorer 4.0-->
+                            <!--</td>-->
+                            <!--<td>Win 95+</td>-->
+                            <!--<td class="center">4</td>-->
+                            <!--<td class="center">X</td>-->
+                         <!--</tr>-->
+                         <!--<tr class="gradeC">-->
+                            <!--<td>Trident</td>-->
+                            <!--<td>Internet-->
+                                <!--Explorer 5.0-->
+                            <!--</td>-->
+                            <!--<td>Win 95+</td>-->
+                            <!--<td class="center">5</td>-->
+                            <!--<td class="center">C</td>-->
+                         <!--</tr>-->
+                         <!--<tr class="gradeA">-->
+                            <!--<td>Trident</td>-->
+                            <!--<td>Internet-->
+                                <!--Explorer 5.5-->
+                            <!--</td>-->
+                            <!--<td>Win 95+</td>-->
+                            <!--<td class="center">5.5</td>-->
+                            <!--<td class="center">A</td>-->
+                         <!--</tr>-->
+                         <!--<tr class="gradeA">-->
+                            <!--<td>Trident</td>-->
+                            <!--<td>Internet-->
+                                <!--Explorer 6-->
+                            <!--</td>-->
+                            <!--<td>Win 98+</td>-->
+                            <!--<td class="center">6</td>-->
+                            <!--<td class="center">A</td>-->
+                         <!--</tr>-->
+                        <!--<tr class="gradeA">-->
+                            <!--<td>Trident</td>-->
+                            <!--<td>Internet Explorer 7</td>-->
+                            <!--<td>Win XP SP2+</td>-->
+                            <!--<td class="center">7</td>-->
+                            <!--<td class="center">A</td>-->
+                        <!--</tr>-->
+                        <!--<tr class="gradeA">-->
+                            <!--<td>Trident</td>-->
+                            <!--<td>AOL browser (AOL desktop)</td>-->
+                            <!--<td>Win XP</td>-->
+                            <!--<td class="center">6</td>-->
+                            <!--<td class="center">A</td>-->
+                        <!--</tr>-->
+                        <!--<tr class="gradeA">-->
+                            <!--<td>Gecko</td>-->
+                            <!--<td>Firefox 1.0</td>-->
+                            <!--<td>Win 98+ / OSX.2+</td>-->
+                            <!--<td class="center">1.7</td>-->
+                            <!--<td class="center">A</td>-->
+                        <!--</tr>-->
+                        <!--<tr class="gradeA">-->
+                            <!--<td>Gecko</td>-->
+                            <!--<td>Firefox 1.5</td>-->
+                            <!--<td>Win 98+ / OSX.2+</td>-->
+                            <!--<td class="center">1.8</td>-->
+                            <!--<td class="center">A</td>-->
+                        <!--</tr>-->
+                        <!--<tr class="gradeA">-->
+                            <!--<td>Gecko</td>-->
+                            <!--<td>Firefox 2.0</td>-->
+                            <!--<td>Win 98+ / OSX.2+</td>-->
+                            <!--<td class="center">1.8</td>-->
+                            <!--<td class="center">A</td>-->
+                        <!--</tr>-->
+                        <!--<tr class="gradeA">-->
+                            <!--<td>Gecko</td>-->
+                            <!--<td>Firefox 3.0</td>-->
+                            <!--<td>Win 2k+ / OSX.3+</td>-->
+                            <!--<td class="center">1.9</td>-->
+                            <!--<td class="center">A</td>-->
+                        <!--</tr>-->
+                        <!--<tr class="gradeA">-->
+                            <!--<td>Gecko</td>-->
+                            <!--<td>Camino 1.0</td>-->
+                            <!--<td>OSX.2+</td>-->
+                            <!--<td class="center">1.8</td>-->
+                            <!--<td class="center">A</td>-->
+                        <!--</tr>-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Camino 1.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>OSX.3+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Netscape 7.2</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / Mac OS 8.6-9.2</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.7</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Netscape Browser 8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 98SE+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.7</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Netscape Navigator 9</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 98+ / OSX.2+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.0</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.2</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.2</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.4</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.4</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.6</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.6</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.7</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 98+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.7</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mozilla 1.8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 98+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Seamonkey 1.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 98+ / OSX.2+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gecko</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Epiphany 2.20</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Gnome</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1.8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Webkit</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Safari 1.2</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>OSX.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">125.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Webkit</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Safari 1.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>OSX.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">312.8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Webkit</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Safari 2.0</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>OSX.4+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">419.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Webkit</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Safari 3.0</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>OSX.4+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">522.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Webkit</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>OmniWeb 5.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>OSX.4+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">420</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Webkit</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>iPod Touch / iPhone</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>iPod</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">420.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Webkit</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>S60</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>S60</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">413</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Opera 7.0</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.1+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Opera 7.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.2+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Opera 8.0</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.2+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Opera 8.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.2+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Opera 9.0</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 95+ / OSX.3+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Opera 9.2</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 88+ / OSX.3+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Opera 9.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Win 88+ / OSX.3+</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Opera for Wii</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Wii</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Nokia N800</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>N800</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Presto</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Nintendo DS browser</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Nintendo DS</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">8.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">C/A<sup>1</sup></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeC">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>KHTML</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Konqureror 3.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>KDE 3.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">3.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">C</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>KHTML</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Konqureror 3.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>KDE 3.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">3.3</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>KHTML</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Konqureror 3.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>KDE 3.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">3.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeX">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Tasman</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Internet Explorer 4.5</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mac OS 8-9</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">X</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeC">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Tasman</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Internet Explorer 5.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mac OS 7.6-9</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">C</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeC">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Tasman</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Internet Explorer 5.2</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Mac OS 8-X</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">C</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Misc</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>NetFront 3.1</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Embedded devices</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">C</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeA">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Misc</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>NetFront 3.4</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Embedded devices</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">A</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeX">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Misc</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Dillo 0.8</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Embedded devices</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">X</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeX">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Misc</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Links</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Text only</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">X</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeX">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Misc</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Lynx</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Text only</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">X</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeC">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Misc</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>IE Mobile</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Windows Mobile 6</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">C</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeC">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Misc</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>PSP browser</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>PSP</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">C</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr class="gradeU">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>Other browsers</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>All others</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td>-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">-</td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<td class="center">U</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--</tbody>-->
+                        <!--&lt;!&ndash;<tfoot>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<th>Rendering engine</th>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<th>Browser</th>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<th>Platform(s)</th>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<th>Engine version</th>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<th>CSS grade</th>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</tfoot>&ndash;&gt;-->
+                    <!--</table>-->
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Table with data from $scope - <strong>(The angular way)</strong></h5>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+                    <table datatable="ng" dt-options="dtOptions"  class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="person in persons">
+                            <td>{{ person.id }}</td>
+                            <td>{{ person.firstName }}</td>
+                            <td>{{ person.lastName }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
